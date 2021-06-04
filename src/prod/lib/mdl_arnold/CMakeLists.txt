@@ -211,7 +211,6 @@ else()
 endif()
 
 # creates a user settings file to setup the debugger (visual studio only, otherwise this is a no-op)
-set(_VS_OUTPUT_DIRECTORY ${CMAKE_CURRENT_BINARY_DIR}/$(Configuration)/lib)
 set_target_properties(${PROJECT_NAME} 
     PROPERTIES
         VS_DEBUGGER_COMMAND             "${MDL_DEPENDENCY_ARNOLDSDK_BIN}/kick${CMAKE_BINARY_LIBRARY_SUFFIX}"

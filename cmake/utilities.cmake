@@ -292,7 +292,7 @@ function(SETUP_IDE)
     endif()
 
     set_target_properties(${SETUP_IDE_TARGET} PROPERTIES 
-        VS_DEBUGGER_WORKING_DIRECTORY           ${CMAKE_CURRENT_BINARY_DIR}/$(Configuration)   # working directory
+        VS_DEBUGGER_WORKING_DIRECTORY           ${CMAKE_CURRENT_BINARY_DIR}/$<CONFIG>   # working directory
         PROJECT_LABEL                           ${FOLDER_NAME}                          # project name
         MAP_IMPORTED_CONFIG_DEBUG               Debug
         MAP_IMPORTED_CONFIG_RELEASE             Release
@@ -901,7 +901,7 @@ function(TARGET_ADD_CONTENT)
         set(TARGET_ADD_CONTENT_DEP_NAME "content")
     endif()
     if(WINDOWS)
-        set(_DEP ${CMAKE_CURRENT_BINARY_DIR}/$(Configuration)/${TARGET_ADD_CONTENT_DEP_NAME}.d)
+        set(_DEP ${CMAKE_CURRENT_BINARY_DIR}/${CMAKE_CFG_INTDIR}/${TARGET_ADD_CONTENT_DEP_NAME}.d)
     else()
         set(_DEP ${CMAKE_CURRENT_BINARY_DIR}/${TARGET_ADD_CONTENT_DEP_NAME}.d)
     endif()

@@ -112,17 +112,17 @@ target_add_tool_dependency(TARGET ${PROJECT_NAME} TOOL swig)
 # run template processing for the interface classes
 add_custom_command(
     OUTPUT
-        ${_GENERATED_DIR}/$(configuration)/processed_headers.d
+        ${_GENERATED_DIR}/${CMAKE_CFG_INTDIR}/processed_headers.d
     COMMAND ${CMAKE_COMMAND} -E echo "SWIG template instantiation ..."
     COMMAND ${CMAKE_COMMAND} -E make_directory ${_GENERATED_DIR}
     COMMAND ${CMAKE_COMMAND} -E make_directory ${_GENERATED_DIR}/processed_headers
-    COMMAND ${CMAKE_COMMAND} -E make_directory ${_GENERATED_DIR}/$(configuration)
+    COMMAND ${CMAKE_COMMAND} -E make_directory ${_GENERATED_DIR}/${CMAKE_CFG_INTDIR}
     COMMAND Python::Interpreter ${CMAKE_CURRENT_SOURCE_DIR}/instantiate_templates_inline.py
         ${CMAKE_CURRENT_SOURCE_DIR}/mdl_python_swig.i
         ""
         ${MDL_INCLUDE_FOLDER}
         ${_GENERATED_DIR}/processed_headers
-        ${_GENERATED_DIR}/$(configuration)/processed_headers.d
+        ${_GENERATED_DIR}/${CMAKE_CFG_INTDIR}/processed_headers.d
     DEPENDS
         ${CMAKE_CURRENT_SOURCE_DIR}/instantiate_templates_inline.py
         ${CMAKE_CURRENT_SOURCE_DIR}/mdl_python_swig.i
@@ -148,7 +148,7 @@ add_custom_command(
         -module pymdlsdk
         ${CMAKE_CURRENT_SOURCE_DIR}/mdl_python_swig.i
     DEPENDS
-        ${_GENERATED_DIR}/$(configuration)/processed_headers.d
+        ${_GENERATED_DIR}/${CMAKE_CFG_INTDIR}/processed_headers.d
         ${CMAKE_CURRENT_SOURCE_DIR}/mdl_python_swig.i
         ${PROJECT_SOURCES}
     VERBATIM
@@ -163,7 +163,7 @@ add_custom_command(
     DEPENDS
         ${CMAKE_CURRENT_SOURCE_DIR}/mdl_python_swig.i
         ${_GENERATED_DIR}/mdl_python_swig.cpp
-        ${_GENERATED_DIR}/$(configuration)/processed_headers.d
+        ${_GENERATED_DIR}/${CMAKE_CFG_INTDIR}/processed_headers.d
     VERBATIM
     )
 
