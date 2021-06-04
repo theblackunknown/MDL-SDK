@@ -56,6 +56,6 @@ else()
     # parse version number
     STRING(REGEX MATCH "[0-9]+\\.[0-9]+\\.[0-9]+" _CLANG_VERSION_STRING ${_CLANG_VERSION_STRING})
     if(${_CLANG_VERSION_STRING} VERSION_GREATER_EQUAL "7.1.0" OR ${_CLANG_VERSION_STRING} VERSION_LESS "7.0.0")
-        message(FATAL_ERROR "Clang 7.0 is required but Clang ${_CLANG_VERSION_STRING} was found instead. Please set the CMake option 'clang_PATH' that needs to point to a clang 7.0.x compiler.")
+        message(WARNING "Clang 7.0 is required but Clang ${_CLANG_VERSION_STRING} was found instead. Please set the CMake option 'clang_PATH' that needs to point to a clang 7.0.x compiler.")
     endif()
 endif()
