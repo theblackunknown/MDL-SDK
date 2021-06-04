@@ -359,9 +359,10 @@ if(WINDOWS)
             )
     endif()
 
-    set(_LLVM_EXCLUDE ${_LLVM_EXCLUDE} 
-        LLVMVisualizers
-        )
+    set(_LLVM_EXCLUDE ${_LLVM_EXCLUDE})
+    if (LLVM_ADD_NATIVE_VISUALIZERS_TO_SOLUTION)
+        list(APPEND _LLVM_EXCLUDE LLVMVisualizers)
+    endif()
 endif()
 
 
