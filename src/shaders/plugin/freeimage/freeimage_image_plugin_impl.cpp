@@ -278,7 +278,7 @@ Plugin_description g_plugin_list[] = {
         Plugin_description( "fi_cut"   , FIF_CUT   ),
         Plugin_description( "fi_dds"   , FIF_DDS   ),
         Plugin_description( "fi_exr"   , FIF_EXR   ),
-        Plugin_description( "fi_faxg3" , FIF_FAXG3 ),
+        // Plugin_description( "fi_faxg3" , FIF_FAXG3 ), # not shipped with vcpkg
         Plugin_description( "fi_gif"   , FIF_GIF   ),
         Plugin_description( "fi_hdr"   , FIF_HDR   ),
         Plugin_description( "fi_ico"   , FIF_ICO   ),
