@@ -204,19 +204,17 @@ if(MDL_LOG_PLATFORM_INFOS)
     MESSAGE(STATUS "[INFO] CMAKE_CUDA_COMPILER:                " ${CMAKE_CUDA_COMPILER})
 endif()
 
-if(EXISTS ${MDL_BASE_FOLDER}/cmake/find/find_freeimage_ext.cmake)
-    include(${MDL_BASE_FOLDER}/cmake/find/find_freeimage_ext.cmake)
-    find_freeimage_ext()
-endif()
+find_package(freeimage REQUIRED)
 
 if(EXISTS ${MDL_BASE_FOLDER}/cmake/find/find_boost_ext.cmake)
     include(${MDL_BASE_FOLDER}/cmake/find/find_boost_ext.cmake)
     find_boost_ext()
 endif()
 
-if(MDL_ENABLE_OPENGL_EXAMPLES AND EXISTS ${MDL_BASE_FOLDER}/cmake/find/find_opengl_ext.cmake)
-    include(${MDL_BASE_FOLDER}/cmake/find/find_opengl_ext.cmake)
-    find_opengl_ext()
+if(MDL_ENABLE_OPENGL_EXAMPLES)
+    find_package(OpenGL REQUIRED)
+    find_package(GLEW REQUIRED)
+    find_package(glfw3 REQUIRED)
 endif()
 
 if(MDL_ENABLE_QT_EXAMPLES AND EXISTS ${MDL_BASE_FOLDER}/cmake/find/find_qt_ext.cmake)
@@ -244,10 +242,12 @@ if(MDL_ENABLE_MATERIALX AND EXISTS ${MDL_BASE_FOLDER}/cmake/find/find_materialx.
     find_materialx()
 endif()
 
-if(MDL_ENABLE_PYTHON_BINDINGS AND EXISTS ${MDL_BASE_FOLDER}/cmake/find/find_python_dev_ext.cmake)
-    include(${MDL_BASE_FOLDER}/cmake/find/find_python_dev_ext.cmake)
-    find_python_dev_ext()
+set(_PYTHON_COMPONENTS Interpreter)
+if(MDL_ENABLE_PYTHON_BINDINGS)
+    list(APPEND _PYTHON_COMPONENTS Development)
 endif()
+find_package (Python REQUIRED COMPONENTS ${_PYTHON_COMPONENTS})
+
 
 if(MDL_LOG_PLATFORM_INFOS)
     MESSAGE(STATUS "[INFO] MDL_ENABLE_OPENGL_EXAMPLES:         " ${MDL_ENABLE_OPENGL_EXAMPLES})

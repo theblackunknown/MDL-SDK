@@ -237,8 +237,8 @@ add_custom_command(
     OUTPUT ${_GENERATED_DIR}/compilercore_intrinsic_eval.i
     COMMAND ${CMAKE_COMMAND} -E echo "Generate Standard Module Header ..."
     COMMAND ${CMAKE_COMMAND} -E make_directory ${_GENERATED_DIR}
-    COMMAND ${python_PATH} ${CMAKE_CURRENT_SOURCE_DIR}/generate_stdmodule.py -E P4ssW0rT -e -d ${_GENERATED_DIR}/mdl_module.cpp ${_STANDARD_MDL}
-    COMMAND ${python_PATH} ${CMAKE_CURRENT_SOURCE_DIR}/gen_intrinsic_eval.py ${CMAKE_CURRENT_SOURCE_DIR}/../stdmodule ${_GENERATED_DIR}/compilercore_intrinsic_eval.i
+    COMMAND Python::Interpreter ${CMAKE_CURRENT_SOURCE_DIR}/generate_stdmodule.py -E P4ssW0rT -e -d ${_GENERATED_DIR}/mdl_module.cpp ${_STANDARD_MDL}
+    COMMAND Python::Interpreter ${CMAKE_CURRENT_SOURCE_DIR}/gen_intrinsic_eval.py ${CMAKE_CURRENT_SOURCE_DIR}/../stdmodule ${_GENERATED_DIR}/compilercore_intrinsic_eval.i
     DEPENDS 
         ${CMAKE_CURRENT_SOURCE_DIR}/generate_stdmodule.py 
         ${CMAKE_CURRENT_SOURCE_DIR}/gen_intrinsic_eval.py

@@ -123,7 +123,7 @@ add_custom_command(
     OUTPUT ${_GENERATED_DIR}/hlsl_intrinsics.i
     COMMAND ${CMAKE_COMMAND} -E echo "Generate intrinsic Header ..."
     COMMAND ${CMAKE_COMMAND} -E make_directory ${_GENERATED_DIR}
-    COMMAND ${python_PATH} ${CMAKE_CURRENT_SOURCE_DIR}/gen_hlsl_intrinsics.py ${CMAKE_CURRENT_SOURCE_DIR}/gen_intrin_main.txt ${_GENERATED_DIR}/hlsl_intrinsics.h ${_GENERATED_DIR}/hlsl_intrinsics.i
+    COMMAND Python::Interpreter ${CMAKE_CURRENT_SOURCE_DIR}/gen_hlsl_intrinsics.py ${CMAKE_CURRENT_SOURCE_DIR}/gen_intrin_main.txt ${_GENERATED_DIR}/hlsl_intrinsics.h ${_GENERATED_DIR}/hlsl_intrinsics.i
     DEPENDS 
         ${CMAKE_CURRENT_SOURCE_DIR}/gen_hlsl_intrinsics.py 
         ${CMAKE_CURRENT_SOURCE_DIR}/gen_intrin_main.txt

@@ -117,7 +117,7 @@ add_custom_command(
     COMMAND ${CMAKE_COMMAND} -E make_directory ${_GENERATED_DIR}
     COMMAND ${CMAKE_COMMAND} -E make_directory ${_GENERATED_DIR}/processed_headers
     COMMAND ${CMAKE_COMMAND} -E make_directory ${_GENERATED_DIR}/$(configuration)
-    COMMAND ${python_PATH} ${CMAKE_CURRENT_SOURCE_DIR}/instantiate_templates_inline.py
+    COMMAND Python::Interpreter ${CMAKE_CURRENT_SOURCE_DIR}/instantiate_templates_inline.py
         ${CMAKE_CURRENT_SOURCE_DIR}/mdl_python_swig.i
         ""
         ${MDL_INCLUDE_FOLDER}

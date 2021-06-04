@@ -135,7 +135,7 @@ set(LLVM_ENABLE_LIBXML2 "OFF" CACHE STRING "Use libxml2 if available. Can be ON,
 
 # python path
 target_add_tool_dependency(TARGET ${PROJECT_NAME} TOOL python)
-set(PYTHON_EXECUTABLE ${python_PATH})
+set(PYTHON_EXECUTABLE ${Python_EXECUTABLE})
 
 set(LLVM_CMAKE_SOURCE_DIR ${CMAKE_CURRENT_SOURCE_DIR}/dist CACHE PATH "LLVM source root.")
 set(LLVM_NATIVE_BUILD ${CMAKE_CURRENT_BINARY_DIR}/dist/NATIVE CACHE PATH "Binary root dir for LLVM tablegen.")

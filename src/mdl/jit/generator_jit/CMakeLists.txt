@@ -194,7 +194,7 @@ add_custom_command(
     OUTPUT ${_GENERATED_DIR}/generator_jit_intrinsic_func.i
     COMMAND ${CMAKE_COMMAND} -E echo "Generating generator_jit_intrinsic_func.i ..."
     COMMAND ${CMAKE_COMMAND} -E make_directory ${_GENERATED_DIR}
-    COMMAND ${python_PATH} ${CMAKE_CURRENT_SOURCE_DIR}/gen_intrinsic_func.py ${_STANDARD_MDL_DIR} ${_GENERATED_DIR}/generator_jit_intrinsic_func.i
+    COMMAND Python::Interpreter ${CMAKE_CURRENT_SOURCE_DIR}/gen_intrinsic_func.py ${_STANDARD_MDL_DIR} ${_GENERATED_DIR}/generator_jit_intrinsic_func.i
     DEPENDS 
         ${CMAKE_CURRENT_SOURCE_DIR}/gen_intrinsic_func.py
         ${_STANDARD_MDL}
@@ -205,7 +205,7 @@ foreach(HS ${DF_HANDLE_SLOT_MODES})
     add_custom_command(
         OUTPUT ${_GENERATED_DIR}/libbsdf_bitcode_${HS}.h
         COMMAND ${CMAKE_COMMAND} -E make_directory ${_GENERATED_DIR}
-        COMMAND ${python_PATH} ${CMAKE_CURRENT_SOURCE_DIR}/gen_libbsdf.py ${CMAKE_CURRENT_BINARY_DIR}/../libbsdf/generated/libbsdf_${HS}.bc ${_GENERATED_DIR}
+        COMMAND Python::Interpreter ${CMAKE_CURRENT_SOURCE_DIR}/gen_libbsdf.py ${CMAKE_CURRENT_BINARY_DIR}/../libbsdf/generated/libbsdf_${HS}.bc ${_GENERATED_DIR}
         DEPENDS 
             ${CMAKE_CURRENT_SOURCE_DIR}/gen_libbsdf.py
             ${CMAKE_CURRENT_BINARY_DIR}/../libbsdf/generated/libbsdf_${HS}.bc
@@ -217,7 +217,7 @@ add_custom_command(
     OUTPUT ${_GENERATED_DIR}/libmdlrt_bitcode.h
     COMMAND ${CMAKE_COMMAND} -E echo "Generating libmdlrt_bitcode.h ..."
     COMMAND ${CMAKE_COMMAND} -E make_directory ${_GENERATED_DIR}
-    COMMAND ${python_PATH} ${CMAKE_CURRENT_SOURCE_DIR}/gen_libmdlrt.py ${CMAKE_CURRENT_BINARY_DIR}/../libmdlrt/generated/libmdlrt.bc ${_GENERATED_DIR}
+    COMMAND Python::Interpreter ${CMAKE_CURRENT_SOURCE_DIR}/gen_libmdlrt.py ${CMAKE_CURRENT_BINARY_DIR}/../libmdlrt/generated/libmdlrt.bc ${_GENERATED_DIR}
     DEPENDS
         ${CMAKE_CURRENT_SOURCE_DIR}/gen_libmdlrt.py
         ${CMAKE_CURRENT_BINARY_DIR}/../libmdlrt/generated/libmdlrt.bc
@@ -228,7 +228,7 @@ add_custom_command(
     OUTPUT ${_GENERATED_DIR}/glue_libdevice.h
     COMMAND ${CMAKE_COMMAND} -E echo "Generating glue_libdevice.h ..."
     COMMAND ${CMAKE_COMMAND} -E make_directory ${_GENERATED_DIR}
-    COMMAND ${python_PATH} ${CMAKE_CURRENT_SOURCE_DIR}/gen_libdevice.py ${devlib_PATH} ${CMAKE_CURRENT_SOURCE_DIR}/.. ${_GENERATED_DIR}
+    COMMAND Python::Interpreter ${CMAKE_CURRENT_SOURCE_DIR}/gen_libdevice.py ${devlib_PATH} ${CMAKE_CURRENT_SOURCE_DIR}/.. ${_GENERATED_DIR}
     DEPENDS 
         ${CMAKE_CURRENT_SOURCE_DIR}/gen_libdevice.py
         ${CMAKE_CURRENT_SOURCE_DIR}/../libdevice/libdevice.10.bc # try to replace this with the cuda sdk file
@@ -250,7 +250,7 @@ add_custom_command(
     OUTPUT ${_GENERATED_DIR}/libbsdf_multiscatter_tables.cpp
     COMMAND ${CMAKE_COMMAND} -E echo "Generating libbsdf_multiscatter_tables.cpp ..."
     COMMAND ${CMAKE_COMMAND} -E make_directory ${_GENERATED_DIR}
-    COMMAND ${python_PATH} ${CMAKE_CURRENT_SOURCE_DIR}/gen_libbsdf_multiscatter_tables.py ${_GENERATED_DIR}/libbsdf_multiscatter_tables.cpp ${_TABLES}
+    COMMAND Python::Interpreter ${CMAKE_CURRENT_SOURCE_DIR}/gen_libbsdf_multiscatter_tables.py ${_GENERATED_DIR}/libbsdf_multiscatter_tables.cpp ${_TABLES}
     DEPENDS
         ${CMAKE_CURRENT_SOURCE_DIR}/gen_libbsdf_multiscatter_tables.py
         ${_TABLES}
