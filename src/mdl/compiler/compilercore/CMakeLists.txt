@@ -234,7 +234,10 @@ set(_STANDARD_MDL
 
 target_add_tool_dependency(TARGET ${PROJECT_NAME} TOOL python)
 add_custom_command(
-    OUTPUT ${_GENERATED_DIR}/compilercore_intrinsic_eval.i
+    OUTPUT
+        ${_GENERATED_DIR}/mdl_module.h
+        ${_GENERATED_DIR}/mdl_module.cpp
+        ${_GENERATED_DIR}/compilercore_intrinsic_eval.i
     COMMAND ${CMAKE_COMMAND} -E echo "Generate Standard Module Header ..."
     COMMAND ${CMAKE_COMMAND} -E make_directory ${_GENERATED_DIR}
     COMMAND Python::Interpreter ${CMAKE_CURRENT_SOURCE_DIR}/generate_stdmodule.py -E P4ssW0rT -e -d ${_GENERATED_DIR}/mdl_module.cpp ${_STANDARD_MDL}
