@@ -100,5 +100,10 @@ target_add_dependencies(TARGET ${PROJECT_NAME}
         boost
     )
 
+target_compile_definitions(${PROJECT_NAME}
+    PRIVATE
+        BOOST_UUID_FORCE_AUTO_LINK # for some reason this is not working while using vcpkg boost-uuid
+)
+
 # add tests if available
 add_tests(POST)
