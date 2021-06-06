@@ -27,7 +27,7 @@
 #*****************************************************************************
 
 # name of the target and the resulting library
-set(PROJECT_NAME prod-bin-i18n)
+set(PROJECT_NAME i18n)
 
 # collect sources
 set(PROJECT_HEADERS

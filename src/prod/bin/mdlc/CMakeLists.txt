@@ -27,7 +27,7 @@
 #*****************************************************************************
 
 # name of the target and the resulting library
-set(PROJECT_NAME prod-bin-mdlc)
+set(PROJECT_NAME mdlc)
 
 # collect sources
 set(PROJECT_HEADERS

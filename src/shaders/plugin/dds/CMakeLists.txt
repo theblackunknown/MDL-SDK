@@ -27,7 +27,7 @@
 #*****************************************************************************
 
 # name of the target and the resulting library
-set(PROJECT_NAME shaders-plugin-dds)
+set(PROJECT_NAME dds)
 
 # collect sources
 set(PROJECT_HEADERS
@@ -71,7 +71,6 @@ if(MACOSX)
 endif()
 
 # target alias for the custom name
-add_library(dds ALIAS ${PROJECT_NAME})
 add_library(mdl::dds ALIAS ${PROJECT_NAME})
 
 # add dependencies other dependencies

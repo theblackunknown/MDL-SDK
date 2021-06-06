@@ -239,3 +239,37 @@ source_group("base" FILES ${PROJECT_HEADERS_BASE})
 source_group("math" FILES ${PROJECT_HEADERS_MATH})
 source_group("mdl" FILES ${PROJECT_HEADERS_MDL})
 source_group("neuraylib" FILES ${PROJECT_HEADERS_NEURAYLIB})
+
+add_library(headers INTERFACE)
+target_include_directories(headers
+    INTERFACE
+        $<BUILD_INTERFACE:${CMAKE_CURRENT_LIST_DIR}>
+        $<INSTALL_INTERFACE:include>
+)
+
+if(MDL_INSTALL_HEADERS)
+    install(
+        FILES
+            ${PROJECT_HEADERS_TOPLEVEL}
+        DESTINATION ${CMAKE_INSTALL_INCLUDEDIR}/mi
+        COMPONENT   SDK
+    )
+    install(
+        FILES
+            ${PROJECT_HEADERS_BASE}
+        DESTINATION ${CMAKE_INSTALL_INCLUDEDIR}/mi/base
+        COMPONENT   SDK
+    )
+    install(
+        FILES
+            ${PROJECT_HEADERS_MATH}
+        DESTINATION ${CMAKE_INSTALL_INCLUDEDIR}/mi/math
+        COMPONENT   SDK
+    )
+    install(
+        FILES
+            ${PROJECT_HEADERS_NEURAYLIB}
+        DESTINATION ${CMAKE_INSTALL_INCLUDEDIR}/mi/neuraylib
+        COMPONENT   SDK
+    )
+endif()

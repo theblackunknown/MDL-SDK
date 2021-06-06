@@ -27,7 +27,7 @@
 #*****************************************************************************
 
 # name of the target and the resulting example
-set(PROJECT_NAME prod-bin-mdlm)
+set(PROJECT_NAME mdlm)
 
 # collect sources
 set(PROJECT_HEADERS

@@ -27,7 +27,7 @@
 #*****************************************************************************
 
 # name of the target and the resulting library
-set(PROJECT_NAME prod-lib-mdl_core)
+set(PROJECT_NAME mdl_core)
 
 # collect sources
 set(PROJECT_SOURCES 
@@ -51,7 +51,6 @@ if(MACOSX)
 endif()
 
 # target alias for the custom name
-add_library(mdl_core ALIAS ${PROJECT_NAME})
 add_library(mdl::mdl_core ALIAS ${PROJECT_NAME})
 
 # add mdl and other dependencies

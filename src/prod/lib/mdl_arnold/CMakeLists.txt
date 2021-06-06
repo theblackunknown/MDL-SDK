@@ -26,7 +26,7 @@
 # OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 #*****************************************************************************
 
-set(PROJECT_NAME prod-lib-mdl_arnold)
+set(PROJECT_NAME mdl_arnold)
 
 # collect sources
 set(SOURCES_HEADERS
@@ -69,7 +69,6 @@ if(MACOSX)
 endif()
 
 # target alias for the custom name
-add_library(mdl_arnold ALIAS ${PROJECT_NAME})
 add_library(mdl::mdl_arnold ALIAS ${PROJECT_NAME})
 
 # add dependencies

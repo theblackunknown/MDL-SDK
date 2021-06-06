@@ -204,7 +204,9 @@ if(MDL_LOG_PLATFORM_INFOS)
     MESSAGE(STATUS "[INFO] CMAKE_CUDA_COMPILER:                " ${CMAKE_CUDA_COMPILER})
 endif()
 
-find_package(freeimage REQUIRED)
+if(MDL_BUILD_MDL_PLUGINS)
+    find_package(freeimage REQUIRED)
+endif()
 
 if(EXISTS ${MDL_BASE_FOLDER}/cmake/find/find_boost_ext.cmake)
     include(${MDL_BASE_FOLDER}/cmake/find/find_boost_ext.cmake)

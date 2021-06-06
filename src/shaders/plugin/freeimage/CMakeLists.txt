@@ -27,7 +27,7 @@
 #*****************************************************************************
 
 # name of the target and the resulting library
-set(PROJECT_NAME shaders-plugin-freeimage)
+set(PROJECT_NAME nv_freeimage)
 
 # collect sources
 set(PROJECT_HEADERS
@@ -62,7 +62,6 @@ if(MACOSX)
 endif()
 
 # target alias for the custom name
-add_library(nv_freeimage ALIAS ${PROJECT_NAME})
 add_library(mdl::nv_freeimage ALIAS ${PROJECT_NAME})
 
 # add dependencies other dependencies

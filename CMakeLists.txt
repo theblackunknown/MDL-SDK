@@ -47,11 +47,16 @@ set(MDL_EXAMPLES_FOLDER ${CMAKE_SOURCE_DIR}/examples CACHE PATH "The folder that
 option(MDL_BUILD_SDK_EXAMPLES "Adds MDL SDK examples to the build." ON)
 option(MDL_BUILD_CORE_EXAMPLES "Adds MDL Core examples to the build." ON)
 option(MDL_BUILD_ARNOLD_PLUGIN "Enable the build of the MDL Arnold plugin." OFF)
+option(MDL_BUILD_MDL_PLUGINS "Enable MDL SDK plugins." ON)
 option(MDL_LOG_PLATFORM_INFOS "Prints some infos about the current build system (relevant for error reports)." ON)
 option(MDL_LOG_DEPENDENCIES "Prints the list of dependencies during the generation step." OFF)
 option(MDL_LOG_FILE_DEPENDENCIES "Prints the list of files that is copied after a successful build." OFF)
+option(MDL_INSTALL_HEADERS "Install headers." ON)
 set(MDL_ADDITIONAL_COMPILER_DEFINES "MDL_SOURCE_RELEASE" CACHE STRING "Additional compile defines that are passed to each of the projects")
 set(MDL_ADDITIONAL_COMPILER_OPTIONS "" CACHE STRING "Additional compile options that are passed to each of the projects")
+
+include(GNUInstallDirs)
+include(CMakePackageConfigHelpers)
 
 # set the default installation path
 if(NOT DEFINED CMAKE_INSTALL_PREFIX OR CMAKE_INSTALL_PREFIX_INITIALIZED_TO_DEFAULT)
@@ -144,8 +149,10 @@ add_subdirectory(${MDL_SRC_FOLDER}/prod/bin/mdlm)
 
 # PLUGINS
 #--------------------------------------------------------------------------------------------------
-add_subdirectory(${MDL_SRC_FOLDER}/shaders/plugin/dds)
-add_subdirectory(${MDL_SRC_FOLDER}/shaders/plugin/freeimage)
+if(MDL_BUILD_MDL_PLUGINS)
+    add_subdirectory(${MDL_SRC_FOLDER}/shaders/plugin/dds)
+    add_subdirectory(${MDL_SRC_FOLDER}/shaders/plugin/freeimage)
+endif()
 
 # EXAMPLES
 #--------------------------------------------------------------------------------------------------
@@ -235,3 +242,85 @@ foreach(_TEST_POST ${MDL_TEST_LIST_POST})
     add_subdirectory(${_TEST_POST})
 endforeach()
 
+# Config
+#--------------------------------------------------------------------------------------------------
+
+file(WRITE "${CMAKE_CURRENT_BINARY_DIR}/mdl-config.cmake.in" [=[
+@PACKAGE_INIT@
+include("@PACKAGE_PATH_EXPORT_TARGETS@")
+]=])
+
+set(PATH_EXPORT_TARGETS "${CMAKE_INSTALL_DATADIR}/mdl/mdl-targets.cmake")
+configure_package_config_file(
+    "${CMAKE_CURRENT_BINARY_DIR}/mdl-config.cmake.in"
+    "${CMAKE_CURRENT_BINARY_DIR}/mdl-config.cmake"
+    PATH_VARS
+        PATH_EXPORT_TARGETS
+    INSTALL_DESTINATION ${CMAKE_INSTALL_DATADIR}/mdl
+)
+
+write_basic_package_version_file("${CMAKE_CURRENT_BINARY_DIR}/mdl-config-version.cmake"
+    VERSION     2021
+    COMPATIBILITY SameMajorVersion
+)
+
+# Install
+#--------------------------------------------------------------------------------------------------
+
+install(
+    TARGETS
+        headers
+        mdl_core
+        mdl_sdk
+    EXPORT   mdl-targets
+    ARCHIVE  COMPONENT SDK
+    LIBRARY  COMPONENT SDK
+    RUNTIME  COMPONENT SDK
+    INCLUDES COMPONENT SDK
+)
+
+install(
+    TARGETS
+        i18n
+        mdlc
+        mdlm
+    EXPORT        mdl-targets
+    RUNTIME  COMPONENT Tools
+)
+
+if(MDL_BUILD_ARNOLD_PLUGIN)
+    install(
+        TARGETS
+            mld_arnold
+        EXPORT   mdl-targets
+        LIBRARY  COMPONENT Plugins
+    )
+endif()
+
+if(MDL_BUILD_MDL_PLUGINS)
+    install(
+        TARGETS
+            dds
+            nv_freeimage
+        EXPORT   mdl-targets
+        LIBRARY  COMPONENT Plugins
+    )
+endif()
+
+install(
+    EXPORT       mdl-targets
+    NAMESPACE    "mdl::"
+    DESTINATION  "${CMAKE_INSTALL_DATADIR}/mdl"
+)
+
+install(
+    FILES
+        ${CMAKE_CURRENT_BINARY_DIR}/mdl-config.cmake
+        ${CMAKE_CURRENT_BINARY_DIR}/mdl-config-version.cmake
+    DESTINATION  "${CMAKE_INSTALL_DATADIR}/mdl"
+)
+
+export(
+    EXPORT    mdl-targets
+    NAMESPACE "mdl::"
+)
